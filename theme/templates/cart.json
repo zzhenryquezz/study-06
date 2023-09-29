@@ -1,0 +1,16 @@
+{
+    "sections": {
+        "header": {
+            "type": "header",
+            "settings": {}
+        },
+        "cart-product-list": {
+            "type": "cart-product-list",
+            "settings": {}
+        }
+    },
+    "order": [
+        "header",
+        "cart-product-list"
+    ]
+}

@@ -1,0 +1,46 @@
+{% form 'cart', cart %}
+  <div class="container mx-auto py-10 gap-5">
+    <h2 class="text-4xl w-full text-zinc-500 font-bold mb-10">Cart</h2>
+
+    <div class="flex flex-col gap-y-5">
+      {% for item in cart.items %}
+        <div class="border w-full flex items-center rounded overflow-hidden">
+          <img src="{{ item.image | img_url: 'small' }}" alt="{{ item.title | escape }}">
+
+          <h2 class="mx-4">{{ item.title }}</h2>
+          <h2 class="mx-4">{{ item.price | money }}</h2>
+
+          <input
+            type="number"
+            name="updates[]"
+            value="{{ item.quantity }}"
+            min="1"
+            class="border border-gray-400 px-2 py-1 w-16 ml-auto">
+
+          <a href="{{ item.url_to_remove }}" class="mx-4 bg-red-500 px-4 py-1 text-white rounded text-sm">Remove</a>
+
+        </div>
+      {% endfor %}
+
+      <div class="ml-auto">
+        <h3 class="text-xl w-full text-zinc-500 font-bold mb-4">Total: {{ cart.total_price | money }}</h3>
+
+        <button
+          type="submit"
+          name="update"
+          class="bg-teal-500 py-1 px-4 text-white mr-2 rounded">
+          Update
+        </button>
+
+        <button
+          type="submit"
+          name="checkout"
+          class="bg-teal-500 py-1 px-4 text-white rounded">
+          Checkout
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+{% endform %}
