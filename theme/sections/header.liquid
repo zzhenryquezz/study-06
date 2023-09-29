@@ -1,0 +1,47 @@
+<header class="w-full bg-red-500 relative h-[500px]">
+
+  <img
+    src="{{ 'tea.jpg' | asset_url }}"
+    class="absolute top-0 w-full h-full object-cover"
+    loading="eager"
+    width="1920"
+    height="1280" />
+
+  <div class="bg-black/75 absolute inset-0"></div>
+
+  <div class="w-full h-full flex items-center justify-center relative">
+    <div>
+      <h1 class="text-white font-bold text-xl md:text-6xl mb-10">{{ section.settings.title }}</h1>
+
+      <ul class="flex justify-center">
+        {% for link in linklists[section.settings.menu].links %}
+          <li>
+            <a class="text-white border border-transparent hover:border-white py-2 px-4 transition-all" href="{{ link.url }}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "liquid",
+        "id": "title",
+        "label": "Title",
+        "default": "{{ shop.name }}"
+      }, {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu",
+        "default": "main-menu"
+      }
+    ],
+    "blocks": []
+  }
+{% endschema %}

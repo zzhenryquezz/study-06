@@ -1,0 +1,72 @@
+<div class="container mx-auto py-10">
+  {% if section.settings.title %}
+    <div class="w-full text-center mb-5">
+      <h2 class="font-bold text-2xl text-zinc-500 mb-4">
+        {{ section.settings.title }}
+      </h2>
+
+      <div class="h-px w-9/12 mx-auto bg-zinc-300"></div>
+
+    </div>
+  {% endif %}
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
+    {% if section.settings.collection %}
+
+      {% for product in collections[section.settings.collection].products %}
+        {% render 'product', product: product %}
+      {% endfor %}
+
+    {% else %}
+
+      {% for product in collections.all.products %}
+        {% render 'product', product: product %}
+      {% endfor %}
+
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Product list",
+    "settings": [
+      {
+        "id": "title",
+        "type": "liquid",
+        "label": "Title",
+        "default": "{{ shop.name }}"
+      }, {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product_card",
+        "name": "Product",
+        "settings": [
+          {
+            "id": "product_mode",
+            "type": "select",
+            "label": "Product",
+            "default": "default",
+            "options": [
+              {
+                "value": "default",
+                "label": "Default"
+              }, {
+                "value": "Rounded",
+                "label": "rounded"
+              }
+            ]
+
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
